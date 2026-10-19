@@ -1,0 +1,26 @@
+# Python
+.venv/
+__pycache__/
+*.pyc
+
+# Downloaded models
+model/
+pretrained_models/
+
+# Voice recordings (biometric data – never commit!)
+*.wav
+*.mp3
+*.m4a
+*.ogg
+*.opus
+*.flac
+audio/
+
+# Logs and results with personal data
+access_log*.csv
+
+# OS / editor
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
