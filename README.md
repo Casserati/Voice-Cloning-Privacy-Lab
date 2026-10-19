@@ -9,7 +9,7 @@ can record or clone the victim's voice.
 
 > **Scenario:** A bank's telephone hotline authenticates customers by their voice and a spoken
 > passphrase. We build a simplified version of such a system and test it against replay attacks
-> and AI-generated voice clones.
+> and AI-generated voice clones created with [Cartesia](https://cartesia.ai/).
 
 ---
 
@@ -297,7 +297,7 @@ logged. To view it during testing, use `type access_log.csv` or Notepad.
 |---|---|---|
 | 1. Normal operation | Real person vs. own reference; other members vs. reference | Real person accepted, others rejected (baseline) |
 | 2. Replay | Recording of the passphrase played back via smartphone | Accepted – the system has no liveness check |
-| 3. Voice cloning | Clones trained on 30 s, 1 min, 2 min, 5 min, 10 min of audio; 5 clips per length | How much audio does an attacker need? |
+| 3. Voice cloning | Clones created with Cartesia from 30 s, 1 min, 2 min, 5 min, 10 min of audio; 5 clips per length | How much audio does an attacker need? |
 | 4. Countermeasure | Random challenge sentence instead of a fixed passphrase | Replay fails; a clone can still generate the new sentence |
 | 5. Listening test | Classmates guess which recordings are real | Does the clone fool humans as well as the machine? |
 
@@ -308,8 +308,9 @@ To keep results comparable:
 - Cut all training lengths from the **same** recording session, so audio length is the only
   variable.
 - Use the same microphone, room and passphrase for all tests.
-- Keep the cloning tool's settings (speed, stability, similarity) identical for all clones.
-- Note tool, plan, model version and date for every clone.
+- Keep the Cartesia settings identical for all clones (model, language, speed – e.g. `sonic-3.6`,
+  `de-CH`, speed `1.0`).
+- Note the Cartesia plan, model version and date for every clone.
 
 ---
 
@@ -338,9 +339,9 @@ leaked. For this project we follow these rules:
   or company systems.
 - **No recordings in Git:** `.gitignore` excludes all audio files, models and logs. Recordings are
   stored only in our private group folder.
-- **Third-party providers:** uploading voice samples to a web cloning tool hands biometric data to
-  that provider. We document which tool was used and delete all cloned voices, recordings and
-  accounts after the project.
+- **Third-party provider:** uploading voice samples to Cartesia hands biometric data to an
+  external provider. We document what we uploaded and delete all cloned voices, recordings and
+  the account after the project.
 
 ---
 
@@ -352,7 +353,8 @@ leaked. For this project we follow these rules:
   OpenAI Whisper
 - [Flix-AI/flix-swissgerman-full](https://huggingface.co/Flix-AI/flix-swissgerman-full) – Whisper
   large-v3 fine-tuned for Swiss German (Apache 2.0)
-- Web-based voice cloning tools used for the attacks (e.g. Cartesia, ElevenLabs)
+- [Cartesia](https://cartesia.ai/) – web-based AI voice cloning, used to create the voice clones
+  for the attacks
 
 Parts of the code were created with the help of AI tools (declared in the project documentation).
 
