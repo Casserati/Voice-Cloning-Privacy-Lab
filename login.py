@@ -67,7 +67,12 @@ def transcribe_medium(audio):
 def transcribe_swiss(audio):
     from transformers import WhisperForConditionalGeneration, WhisperProcessor
     processor = WhisperProcessor.from_pretrained(SWISS_MODEL)
-    model = WhisperForConditionalGeneration.from_pretrained(SWISS_MODEL, low_cpu_mem_usage=True)
+    # The model is stored in bfloat16. Load it as float32, because the audio features are
+    # float32 and bfloat16 is slow or unsupported on most laptop CPUs.
+    model = WhisperForConditionalGeneration.from_pretrained(
+        SWISS_MODEL, dtype=torch.float32, low_cpu_mem_usage=True
+    )
+    model = model.float()  # safety net for transformers versions that ignore dtype=
     model.eval()
     features = processor(audio, sampling_rate=16000, return_tensors="pt").input_features
     with torch.no_grad():
