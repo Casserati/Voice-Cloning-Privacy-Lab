@@ -16,6 +16,10 @@ pretrained_models/
 *.flac
 audio/
 
+# Documentation (do not commit!)
+*.docx
+*.pdf
+
 # Logs and results with personal data
 access_log*.csv
 
