@@ -19,6 +19,7 @@ audio/
 # Documentation (do not commit!)
 *.docx
 *.pdf
+*.pptx
 
 # Logs and results with personal data
 access_log*.csv
